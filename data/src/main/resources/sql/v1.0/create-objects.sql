@@ -1,6 +1,6 @@
 CREATE TABLE product (
     id          integer PRIMARY KEY,
-    name        varchar2(10),
+    name        varchar2(40),
     description varchar2(100),
     stock       integer,
     price       numeric(10,2)
