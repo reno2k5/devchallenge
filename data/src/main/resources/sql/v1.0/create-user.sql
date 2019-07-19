@@ -1,0 +1,12 @@
+create user storech IDENTIFIED BY storech;
+grant connect to storech;
+grant create any index to storech;
+grant create job to storech;
+grant create procedure to storech;
+grant create sequence to storech;
+grant create session to storech;
+grant create table to storech;
+grant create trigger to storech;
+grant create type to storech;
+grant create view to storech;
+GRANT UNLIMITED TABLESPACE TO storech;
