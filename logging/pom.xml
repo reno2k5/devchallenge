@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.studentsco</groupId>
-    <artifactId>devchallenge-data</artifactId>
+    <artifactId>devchallenge-logging</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -40,27 +40,9 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-		<dependency>
-            <groupId>com.studentsco</groupId>
-            <artifactId>devchallenge-logging</artifactId>
-            <version>${project.version}</version>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
 
-        <!-- Oracle JDBC driver -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc7</artifactId>
-            <version>${oracle.jdbc.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>
