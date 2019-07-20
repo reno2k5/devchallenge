@@ -11,6 +11,7 @@
     <modules>
         <module>data</module>
         <module>restapp</module>
+		<module>logging</module>
     </modules>
 
 </project>
