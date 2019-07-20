@@ -38,4 +38,41 @@ public class ProductController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    
+    @RequestMapping(value = "/{id}/stock/{stock}",method = RequestMethod.PUT)
+    public ResponseEntity<?> updateStock(@PathVariable("id") Integer id, @PathVariable("stock") Integer newStock){
+        Optional<Product> product;
+        
+        if(newStock <= 0){
+            return new ResponseEntity<>(new CustomError("Stock no puede ser negativo para cualquier producto"), HttpStatus.CONFLICT);
+        }
+        product  = repository.findById(id);
+        if(!product.isPresent()){
+            return new ResponseEntity<>(new CustomError("Producto " + id + " no encontrado, no se puede actualizar"), HttpStatus.NOT_FOUND);
+        }
+        
+        product.get().setStock(newStock);
+        repository.save(product.get());
+        
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/{id}/price/{price}")
+    public ResponseEntity<?> updatePrice(@PathVariable("id") Integer id, @PathVariable("price") Double price){
+        Optional<Product> product;
+        
+        if(price < 0.00){
+            return new ResponseEntity<>(new CustomError("Precio no puede ser negativo"), HttpStatus.CONFLICT);
+        }
+        
+        product = repository.findById(id);
+        if(!product.isPresent()){
+            return new ResponseEntity<>(new CustomError("Producto "+ id+ " no encontrado, no se puede actualizar"), HttpStatus.NOT_FOUND);
+        }
+        
+        product.get().setPrice(price);
+        repository.save(product.get());
+        
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
