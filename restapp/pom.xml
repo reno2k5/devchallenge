@@ -40,13 +40,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency-->
+        
         <dependency>
             <groupId>com.studentsco</groupId>
             <artifactId>devchallenge-data</artifactId>
             <version>${project.version}</version>
         </dependency>
 		
-		<dependency>
+        <dependency>
             <groupId>com.studentsco</groupId>
             <artifactId>devchallenge-logging</artifactId>
             <version>${project.version}</version>
