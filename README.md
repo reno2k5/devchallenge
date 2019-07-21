@@ -23,10 +23,15 @@ Para tener el ambiente listo, se debe:
 Para compilar el código, abra una línea de comandos, y diríjase hacia la carpeta raíz: devchallenge. Una vez ahí, ejecute el comando "mvn package"
 
 ### Ejecutar
-Finalmente, la aplicación se ejecuta automáticamente en el puerto 80. 
+Finalmente, la aplicación se ejecuta automáticamente en los puertos 80 y 81
 
-Si ya tiene ocupado el puerto 80 en su máquina, diríjase al archivo _\devchallenge\restapp\src\main\resources\application.properties_. Dentro de éste archivo, cambie la propiedad "server.port". Si ésto aplica, regrese al paso anterior (compilar)
+Si ya tiene ocupado el puerto algún puerto en su máquina, diríjase al archivo _\devchallenge\restapp\src\main\resources\application.properties_ para el puerto 80, y al archivo _\devchallenge\service-buy\src\main\resources\application.properties_ para el puerto 81. Dentro de éste archivo, cambie la propiedad "server.port". Si ésto aplica, regrese al paso anterior (compilar)
 
-Para ejecutar, desde la consola ejecutando en el directorio devchallenge, debe entrar el comando "java -jar \restapp\target\devchallenge-restapp-0.0.1-SNAPSHOT.jar". El servidor estará listo en breves momentos
+Para ejecutar, desde la consola ejecutando en el directorio devchallenge, debe entrar el comando:
+
+* Para servicio de productos "restapp\target\devchallenge-service-product-0.0.1-SNAPSHOT.jar"
+* Para servicio de compra "java -jar service-buy\target\devchallenge-service-buy-0.0.1-SNAPSHOT.jar"
+
+El servicio estará disponible en breves momentos, y se mostrará un mensaje en la línea de comandos que diga "Started Application in _x_ seconds"
 
 Los archivos de logs, estarán guardados sobre la carpeta devchallenge, y pueden ser abiertos con cualquier programa para texto en modo únicamente lectura
