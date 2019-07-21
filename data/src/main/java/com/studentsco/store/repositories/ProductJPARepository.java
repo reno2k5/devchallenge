@@ -12,7 +12,10 @@ import org.springframework.stereotype.Repository;
 public interface ProductJPARepository extends JpaRepository<Product, Integer> {
     
     public List<Product> findByStockGreaterThan(Integer stock, Pageable pageable);
-   
+    
     @Query("FROM Product p WHERE p.stock >= :stock ORDER BY size(p.likedBy) DESC")
     public List<Product> findByStockGreaterThanSortedByPopularity(@Param("stock") Integer stock, Pageable pageable);
+    
+    public List<Product> findByNameContaining(String name, Pageable pageable);
+
 }
