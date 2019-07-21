@@ -3,8 +3,11 @@ package com.studentsco.store.api;
 import com.studentsco.store.model.customers.PurchaseHistory;
 import com.studentsco.store.model.products.Product;
 import com.studentsco.store.model.products.StockReductionException;
+import com.studentsco.store.model.security.User;
 import com.studentsco.store.repositories.ProductJPARepository;
 import com.studentsco.store.repositories.PurchaseHistoryJPARepository;
+import com.studentsco.store.repositories.UsersJPARepository;
+import java.security.Principal;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
@@ -24,18 +28,26 @@ public class BuyController {
     Logger logger = LogManager.getLogger(BuyController.class);
 
     @Autowired
-    ProductJPARepository productRepository;
+    private ProductJPARepository productRepository;
 
     @Autowired
-    PurchaseHistoryJPARepository purchaseRepository;
+    private PurchaseHistoryJPARepository purchaseRepository;
 
-    @RequestMapping(value="/product/{id}/amount/{amount}", method = RequestMethod.POST)
+    @Autowired
+    private UsersJPARepository userRepository;
+
+    @RequestMapping(value = "/product/{id}/amount/{amount}", method = RequestMethod.POST)
     public ResponseEntity<?> buyProducts(@PathVariable("id") Integer productId,
-            @PathVariable("amount") Integer amount) {
+            @PathVariable("amount") Integer amount, Principal principal) {
 
         Optional<Product> repoProduct = productRepository.findById(productId);
+        User user = userRepository.findByUsername(principal.getName());
+
         if (!repoProduct.isPresent()) {
             return new ResponseEntity<>("El producto no existe", HttpStatus.NOT_FOUND);
+        }
+        if (user == null) {
+            throw new UsernameNotFoundException(principal.getName());
         }
 
         Product product = repoProduct.get();
@@ -49,6 +61,7 @@ public class BuyController {
         purchase.setAmount(amount);
         purchase.setPurchasePrice(product.getPrice());
         purchase.setPurchaseTime(GregorianCalendar.getInstance());
+        purchase.setUser(user);
 
         try {
 
