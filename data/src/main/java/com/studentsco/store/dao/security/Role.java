@@ -1,4 +1,4 @@
-package com.studentsco.store.model.security;
+package com.studentsco.store.dao.security;
 
 import java.io.Serializable;
 import javax.persistence.Column;

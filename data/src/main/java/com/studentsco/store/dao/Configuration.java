@@ -1,4 +1,4 @@
-package com.studentsco.store.model;
+package com.studentsco.store.dao;
 
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

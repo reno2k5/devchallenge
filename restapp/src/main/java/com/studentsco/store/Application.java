@@ -1,7 +1,7 @@
 package com.studentsco.store;
 
-import com.studentsco.store.model.security.Role;
-import com.studentsco.store.model.security.User;
+import com.studentsco.store.dao.security.Role;
+import com.studentsco.store.dao.security.User;
 import com.studentsco.store.repositories.ProductJPARepository;
 import com.studentsco.store.repositories.RoleJPARepository;
 import com.studentsco.store.repositories.UsersJPARepository;

@@ -1,7 +1,7 @@
 package com.studentsco.store.api;
 
-import com.studentsco.store.model.products.Product;
-import com.studentsco.store.model.security.User;
+import com.studentsco.store.dao.products.Product;
+import com.studentsco.store.dao.security.User;
 import com.studentsco.store.repositories.ProductJPARepository;
 import com.studentsco.store.repositories.UsersJPARepository;
 import java.security.Principal;
@@ -48,7 +48,7 @@ public class ProductController {
         Optional<Product> product = repository.findById(id);
 
         if (!product.isPresent()) {
-            return new ResponseEntity<>(new CustomError("No se pudo borrar producto con id " + id), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No se pudo borrar producto con id " + id, HttpStatus.NOT_FOUND);
         }
         repository.deleteById(id);
 
@@ -60,11 +60,11 @@ public class ProductController {
         Optional<Product> product;
 
         if (newStock <= 0) {
-            return new ResponseEntity<>(new CustomError("Stock no puede ser negativo para cualquier producto"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Stock no puede ser negativo para cualquier producto", HttpStatus.CONFLICT);
         }
         product = repository.findById(id);
         if (!product.isPresent()) {
-            return new ResponseEntity<>(new CustomError("Producto " + id + " no encontrado, no se puede actualizar"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Producto " + id + " no encontrado, no se puede actualizar", HttpStatus.NOT_FOUND);
         }
 
         product.get().setStock(newStock);
@@ -79,12 +79,12 @@ public class ProductController {
         Double originalPrice;
 
         if (price < 0.00) {
-            return new ResponseEntity<>(new CustomError("Precio no puede ser negativo"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Precio no puede ser negativo", HttpStatus.CONFLICT);
         }
 
         product = repository.findById(id);
         if (!product.isPresent()) {
-            return new ResponseEntity<>(new CustomError("Producto " + id + " no encontrado, no se puede actualizar"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Producto " + id + " no encontrado, no se puede actualizar", HttpStatus.NOT_FOUND);
         }
 
         originalPrice = product.get().getPrice();

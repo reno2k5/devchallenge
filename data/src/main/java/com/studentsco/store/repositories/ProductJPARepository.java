@@ -1,6 +1,6 @@
 package com.studentsco.store.repositories;
 
-import com.studentsco.store.model.products.Product;
+import com.studentsco.store.dao.products.Product;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

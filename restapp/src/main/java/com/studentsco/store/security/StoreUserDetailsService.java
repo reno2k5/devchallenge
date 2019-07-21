@@ -1,6 +1,6 @@
 package com.studentsco.store.security;
 
-import com.studentsco.store.model.security.User;
+import com.studentsco.store.dao.security.User;
 import com.studentsco.store.repositories.UsersJPARepository;
 import java.util.Collection;
 import java.util.HashSet;
