@@ -1,6 +1,7 @@
 package com.studentsco.store.model.customers;
 
 import com.studentsco.store.model.products.Product;
+import com.studentsco.store.model.security.User;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
@@ -38,6 +39,10 @@ public class PurchaseHistory implements Serializable {
 
     @Column(name = "price")
     private Double purchasePrice;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     /**
      * @return the id
@@ -107,6 +112,20 @@ public class PurchaseHistory implements Serializable {
      */
     public void setPurchasePrice(Double purchasePrice) {
         this.purchasePrice = purchasePrice;
+    }
+
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
     }
 }
 
