@@ -105,7 +105,7 @@ public class ProductController {
         if (!product.isPresent()) {
             return new ResponseEntity<>("Producto " + id + " no encontrado, no se puede actualizar", HttpStatus.NOT_FOUND);
         }
-        
+
         if (user == null) {
             throw new UsernameNotFoundException(principal.getName());
         }
@@ -131,7 +131,7 @@ public class ProductController {
         products.forEach(product -> {
             product.setLikedBy(new HashSet<>());
         });
-        
+
         return products;
     }
 
@@ -143,13 +143,29 @@ public class ProductController {
         }
 
         Pageable pageable = PageRequest.of(pageNumer, PAGE_SIZE);
-        
+
         List<Product> products = repository.findByStockGreaterThanSortedByPopularity(0, pageable);
-        
+
         products.forEach(product -> {
             product.setLikedBy(new HashSet<>());
         });
 
+        return products;
+    }
+
+    @RequestMapping(value = {"/find/name/{name}", "/find/name/{name}/page/{page}"}, method = RequestMethod.GET)
+    public List<Product> getProductsByName(@PathVariable("name") String name, @PathVariable("page") Optional<Integer> page) {
+        Integer pageNumer = 0;
+        if (page.isPresent()) {
+            pageNumer = page.get();
+        }
+        
+        Pageable pageable = PageRequest.of(pageNumer, PAGE_SIZE);
+        List<Product> products = repository.findByNameContaining(name, pageable);
+        products.forEach(product -> {
+            product.setLikedBy(new HashSet<>());
+        });
+        
         return products;
     }
 }
