@@ -1,4 +1,3 @@
-
 package com.studentsco.store.security;
 
 import com.studentsco.store.model.security.User;
@@ -15,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class StoreUserDetailsService implements UserDetailsService{
 
     @Autowired
@@ -28,7 +27,6 @@ public class StoreUserDetailsService implements UserDetailsService{
         if(user == null){
             throw new UsernameNotFoundException(username);
         }
-        //return new StoreUserPrincipal(user);
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(), user.getPassword(),
                 getAuthorities(user));
