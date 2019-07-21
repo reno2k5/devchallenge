@@ -24,22 +24,22 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productSeq")
     @SequenceGenerator(name = "productSeq", sequenceName = "product_seq_pk", allocationSize = 1)
     private Integer id;
-    
+
     @Column(name = "name", nullable = false)
     private String name;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @Column(name = "stock")
     private Integer stock;
-    
+
     @Column(name = "price")
     private Double price;
-    
+
     @ManyToMany
-    @JoinTable(name = "product_liked", 
-            joinColumns = {@JoinColumn(name = "prod_id")}, 
+    @JoinTable(name = "product_liked",
+            joinColumns = {@JoinColumn(name = "prod_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private Set<User> likedBy;
 
@@ -117,17 +117,17 @@ public class Product implements Serializable {
     }
 
     /**
-     * @return the liked
+     * @return the likedBy list
      */
     public Set<User> getLikedBy() {
-        if(likedBy == null){
+        if (likedBy == null) {
             likedBy = new HashSet<>();
         }
         return likedBy;
     }
 
     /**
-     * @param liked the liked to set
+     * @param likedBy the liked to set
      */
     public void setLikedBy(Set<User> likedBy) {
         this.likedBy = likedBy;
