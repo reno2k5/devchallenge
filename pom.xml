@@ -12,6 +12,7 @@
         <module>data</module>
         <module>restapp</module>
         <module>logging</module>
+		<module>service-buy</module>
     </modules>
 
 </project>
