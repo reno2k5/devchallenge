@@ -70,7 +70,14 @@
             <groupId>com.querydsl</groupId> 
             <artifactId>querydsl-jpa</artifactId> 
         </dependency>
+        <dependency>
+            <groupId>com.github.rozidan</groupId>
+            <artifactId>modelmapper-spring-boot-starter</artifactId>
+            <version>${spring.boot.modelmapper.version}</version>
+        </dependency>
+
     </dependencies>
+    
 
     <build>
         <plugins>

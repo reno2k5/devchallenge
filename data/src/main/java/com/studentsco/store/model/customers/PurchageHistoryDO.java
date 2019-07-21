@@ -1,48 +1,30 @@
 package com.studentsco.store.model.customers;
 
-import com.studentsco.store.model.products.Product;
-import com.studentsco.store.model.security.User;
-import java.io.Serializable;
+import com.studentsco.store.model.products.ProductDO;
+import com.studentsco.store.model.security.UserDO;
 import java.util.Calendar;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-@Entity
-@Table(name = "purchase_history")
-public class PurchaseHistory implements Serializable {
+public class PurchageHistoryDO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchaseHistorySeq")
-    @SequenceGenerator(name = "purchaseHistorySeq", sequenceName = "purchase_history_seq_pk", allocationSize = 1)
-    @Column(name = "id")
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    @Column(name = "amount")
+    private ProductDO product;
     private Integer amount;
-
-    @Column(name = "purchase_time")
-    @Temporal(TemporalType.TIMESTAMP)
     private Calendar purchaseTime;
-
-    @Column(name = "price")
     private Double purchasePrice;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private UserDO user;
+
+    public PurchageHistoryDO() {
+        super();
+    }
+
+    public PurchageHistoryDO(Integer id, ProductDO product, Integer amount, Calendar purchaseTime, Double purchasePrice, UserDO user) {
+        this.id = id;
+        this.product = product;
+        this.amount = amount;
+        this.purchaseTime = purchaseTime;
+        this.purchasePrice = purchasePrice;
+        this.user = user;
+    }
 
     /**
      * @return the id
@@ -61,14 +43,14 @@ public class PurchaseHistory implements Serializable {
     /**
      * @return the product
      */
-    public Product getProduct() {
+    public ProductDO getProduct() {
         return product;
     }
 
     /**
      * @param product the product to set
      */
-    public void setProduct(Product product) {
+    public void setProduct(ProductDO product) {
         this.product = product;
     }
 
@@ -117,15 +99,15 @@ public class PurchaseHistory implements Serializable {
     /**
      * @return the user
      */
-    public User getUser() {
+    public UserDO getUser() {
         return user;
     }
 
     /**
      * @param user the user to set
      */
-    public void setUser(User user) {
+    public void setUser(UserDO user) {
         this.user = user;
     }
-}
 
+}

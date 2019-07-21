@@ -1,6 +1,7 @@
-package com.studentsco.store.model.products;
+package com.studentsco.store.dao.products;
 
-import com.studentsco.store.model.security.User;
+import com.studentsco.store.model.products.StockReductionException;
+import com.studentsco.store.dao.security.User;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;

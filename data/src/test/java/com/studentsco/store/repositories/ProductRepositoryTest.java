@@ -1,7 +1,7 @@
 package com.studentsco.store.repositories;
 
-import com.studentsco.store.model.Configuration;
-import com.studentsco.store.model.products.Product;
+import com.studentsco.store.dao.Configuration;
+import com.studentsco.store.dao.products.Product;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

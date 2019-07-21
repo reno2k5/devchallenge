@@ -21,10 +21,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/product/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/product/*/like").fullyAuthenticated()
-                .antMatchers(HttpMethod.PUT, "/product/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.POST, "/product/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/buy/**").fullyAuthenticated()
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
