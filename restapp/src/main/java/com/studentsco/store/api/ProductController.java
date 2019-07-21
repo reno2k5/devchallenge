@@ -1,13 +1,17 @@
 package com.studentsco.store.api;
 
 import com.studentsco.store.model.products.Product;
+import com.studentsco.store.model.security.User;
 import com.studentsco.store.repositories.ProductJPARepository;
+import com.studentsco.store.repositories.UsersJPARepository;
+import java.security.Principal;
 import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +24,9 @@ public class ProductController {
 
     @Autowired
     private ProductJPARepository repository;
+
+    @Autowired
+    private UsersJPARepository userRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
@@ -79,6 +86,27 @@ public class ProductController {
         repository.save(product.get());
         adminLogger.info("Product " + id + "-" + product.get().getName() + " changed price from " + originalPrice + " to " + price);
 
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}/like")
+    public ResponseEntity<?> likeProduct(@PathVariable("id") Integer id, Principal principal) {
+
+        Optional<Product> product;
+        User user = userRepository.findByUsername(principal.getName());
+
+        product = repository.findById(id);
+        if (!product.isPresent()) {
+            return new ResponseEntity<>("Producto " + id + " no encontrado, no se puede actualizar", HttpStatus.NOT_FOUND);
+        }
+
+        if (user == null) {
+            throw new UsernameNotFoundException(principal.getName());
+        }
+        
+        product.get().getLikedBy().add(user);
+        repository.save(product.get());
+        
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

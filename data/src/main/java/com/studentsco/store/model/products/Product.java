@@ -1,11 +1,17 @@
 package com.studentsco.store.model.products;
 
+import com.studentsco.store.model.security.User;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,6 +36,12 @@ public class Product implements Serializable {
     
     @Column(name = "price")
     private Double price;
+    
+    @ManyToMany
+    @JoinTable(name = "product_liked", 
+            joinColumns = {@JoinColumn(name = "prod_id")}, 
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Set<User> likedBy;
 
     /**
      * @return the id
@@ -102,6 +114,23 @@ public class Product implements Serializable {
      */
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    /**
+     * @return the liked
+     */
+    public Set<User> getLikedBy() {
+        if(likedBy == null){
+            likedBy = new HashSet<>();
+        }
+        return likedBy;
+    }
+
+    /**
+     * @param liked the liked to set
+     */
+    public void setLikedBy(Set<User> likedBy) {
+        this.likedBy = likedBy;
     }
 
     /**
