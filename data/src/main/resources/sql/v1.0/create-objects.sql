@@ -38,9 +38,11 @@ CREATE TABLE product_liked(
 CREATE TABLE purchase_history(
     id integer PRIMARY KEY,
     product_id number(38,0),
-	purchase_time TIMESTAMP,
-	price number(10,2),
-	amount integer
+    purchase_time TIMESTAMP,
+    price number(10,2),
+    amount integer,
+    user_id integer,
+    constraint purchase_user_fk foreign key (user_id) references app_user(id)
 );
 CREATE SEQUENCE purchase_history_seq_pk START WITH 1 INCREMENT BY 1;
 
